@@ -1,47 +1,54 @@
 package view;
 
+import controllers.StartMenuController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
-
-import java.util.Objects;
+//Виды фруктов:
+//Зеленый - нет бонуса
+//Желтый - змейка не умирает от поедания самой себя, длится 60 шагов змейки
+//Красный - увеличение скорости вдвое на 10 шагов
+//Фиолетовый - дополнительная жизнь, при столкновении со степной происходит задержка, чтобы игрок мог сменить направление движения змейки
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 public class Main extends Application {
-    public static final int PIXEL_SIZE = 25;
+    public static final int PIXEL_SIZE = 20;
 
     @Override
-    public void start(Stage primaryStage) throws Exception{
-        try {
-            primaryStage.getIcons()
-                    .add(new Image(Objects.requireNonNull(getClass()
-                            .getClassLoader()
-                            .getResourceAsStream("images/snake_icon.png"))));
-        } catch (Exception e) {
-            System.err.println(e.getMessage());
-            System.exit(0);
-        }
+    public void start(Stage stage) throws Exception{
+       try {
+           stage.getIcons()
+                   .add(new Image(getClass().getResourceAsStream("boginya.png")));
+           } catch (Exception e) {
+           System.err.println(e.getMessage());
+           System.exit(0);
+       }
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("startMenu.fxml"));
+        Parent root = loader.load();
+        StartMenuController startMenuController = loader.getController();
+        System.out.println( loader.getController().toString());
+        startMenuController.setStage(stage);
 
-        Parent root = null;
-        //System.out.println(getClass().getResource("/sample/startMenu.fxml"));
-        try {
-            root = FXMLLoader.load(Objects.requireNonNull(getClass()
-                    .getClassLoader()
-                    .getResource("view/startMenu.fxml")));
-
-        } catch (Exception ex) {
-            System.err.println(ex.getMessage());
-            System.exit(0);
-        }
-
-        primaryStage.setTitle("Snake");
-        primaryStage.setScene(new Scene(root, 800, 600));
-        primaryStage.setResizable(false);
-        primaryStage.centerOnScreen();
-        primaryStage.show();
+        stage.setTitle("Snake");
+        Scene scene = new Scene(root, 800, 600);
+        stage.setScene(scene);
+        stage.setResizable(false);
+        stage.centerOnScreen();
+        stage.show();
 
 
 

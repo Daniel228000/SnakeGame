@@ -9,27 +9,29 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+
 public class StartMenuController {
     Stage stage;
     Field field;
-    Parent root;
-    static final int WIDTH = 800;
-    static final int HEIGHT = 800;
-
+    private static final int WIDTH = 780;
+    private static final int HEIGHT = 780;
+    private static final int SIZE = 40;
     @FXML
     public void startGame() throws IOException {
-        //System.out.println(getClass().getResource("/view/game.fxml"));
-        field = new Field(WIDTH, HEIGHT);
-        FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("/view/game.fxml"));
-        root = loader.load();
-        MainController controller = loader.getController();
+       field = new Field(SIZE, SIZE);
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("game.fxml"));
+        Parent root = loader.load();
         Game game = new Game(field);
-        controller.setGame(game);
-        controller.timerOfMoving();
-        controller.drawScene();
-        Scene scene = new Scene(root, WIDTH, HEIGHT);
-        stage.setScene(scene);
+       MainController controller = loader.getController();
+       controller.setGame(game);
+       controller.timerOfMoving();
+       controller.drawScene(game);
+       Scene scene = new Scene(root, WIDTH, HEIGHT);
+       stage.setScene(scene);
 
+    }
+    public void setStage(Stage stage) {
+        this.stage = stage;
     }
 }
 

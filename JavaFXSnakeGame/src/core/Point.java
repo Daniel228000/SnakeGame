@@ -1,20 +1,13 @@
 package core;
 
-import javafx.geometry.Rectangle2D;
+public class Point {
+    private int x, y ;
 
-public class Cell  {
-    public int x,y;
-    protected boolean isAlive;
-
-    public Cell() {
-        isAlive = true;
-    }
-
-    public Cell(int x, int y) {
+    public Point(int x, int y) {
         this.x = x;
         this.y = y;
-        isAlive = true;
     }
+
     public void setX(int x){
         this.x = x;
     }
